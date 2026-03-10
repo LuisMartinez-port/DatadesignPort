@@ -1,0 +1,15 @@
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Assignment5Sorting.exe
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Assignment5Sorting.deps.json
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Assignment5Sorting.runtimeconfig.json
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Assignment5Sorting.dll
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Assignment5Sorting.pdb
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.AssemblyInfoInputs.cache
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.AssemblyInfo.cs
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.csproj.CoreCompileInputs.cache
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.dll
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\refint\Assignment5Sorting.dll
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.pdb
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\Assignment5Sorting.genruntimeconfig.cache
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\obj\Debug\net9.0\ref\Assignment5Sorting.dll
+C:\Users\Luis\Desktop\Data design work\Assignment5Sorting\bin\Debug\net9.0\Data.txt

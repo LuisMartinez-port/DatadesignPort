@@ -1,0 +1,158 @@
+﻿@page
+@model WrestlingMvcFinal.Pages.Shared.IndexModel
+@{
+    ViewData["Title"] = "Wrestling Matches";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-5 fw-bold text-primary">Wrestling Matches Database</h1>
+
+    <!-- Styled Filter Form -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <form method="get" class="bg-white p-4 rounded-4 shadow-lg border-0">
+                <div class="row g-4 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold fs-6 mb-2">Search Wrestler</label>
+                        <input name="SearchWrestler" value="@Model.SearchWrestler"
+                               class="form-control form-control-lg border-primary shadow-sm"
+                               placeholder="e.g. Roman Reigns, Cody Rhodes">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold fs-6 mb-2">Company</label>
+                        <select name="Company" class="form-select form-select-lg border-primary shadow-sm">
+                            <option value="">All Companies</option>
+                            <option value="WWE" @(Model.Company == "WWE" ? "selected" : "")>WWE</option>
+                            <option value="AEW" @(Model.Company == "AEW" ? "selected" : "")>AEW</option>
+                            <option value="NOAH" @(Model.Company == "NOAH" ? "selected" : "")>NOAH</option>
+                            <option value="Marigold" @(Model.Company == "Marigold" ? "selected" : "")>Marigold</option>
+                            <option value="NXT" @(Model.Company == "NXT" ? "selected" : "")>NXT</option>
+                            <option value="DDT" @(Model.Company == "DDT" ? "selected" : "")>DDT</option>
+                            <option value="DEFY" @(Model.Company == "DEFY" ? "selected" : "")>DEFY</option>
+                            <option value="AJPW" @(Model.Company == "AJPW" ? "selected" : "")>AJPW</option>
+                            <option value="AAA" @(Model.Company == "AAA" ? "selected" : "")>AAA</option>
+                            <option value="CMLL" @(Model.Company == "CMLL" ? "selected" : "")>CMLL</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold fs-6 mb-2">PPV</label>
+                        <select name="PpvFilter" class="form-select form-select-lg border-primary shadow-sm">
+                            <option value="" @(string.IsNullOrEmpty(Model.PpvFilter) ? "selected" : "")>All Matches</option>
+                            <option value="yes" @(Model.PpvFilter == "yes" ? "selected" : "")>PPV Only</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
+                            Filter
+                        </button>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="/" class="btn btn-outline-secondary btn-lg w-100 fw-bold shadow">
+                            Clear
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Matches.Any())
+    {
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-hover shadow-lg">
+                        <thead class="table-dark sticky-top">
+                            <tr>
+                                <th class="fw-bold fs-5 py-3">Company</th>
+                                <th class="fw-bold fs-5 py-3">Event</th>
+                                <th class="fw-bold fs-5 py-3 text-success">Winner</th>
+                                <th class="fw-bold fs-5 py-3 text-danger">Loser</th>
+                                <th class="fw-bold fs-5 py-3">PPV</th>
+                                <th class="fw-bold fs-5 py-3">Title</th>
+                                <th class="fw-bold fs-5 py-3">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var match in Model.Matches)
+                            {
+                                <tr class="border border-secondary border-2 rounded-3 mb-2 shadow-sm bg-white" style="margin-bottom: 10px !important;">
+                                    <td class="align-middle p-3">
+                                        <span class="badge bg-secondary fs-5 px-4 py-3 fw-bold">@match.Company</span>
+                                    </td>
+                                    <td class="align-middle p-3 fw-semibold fs-6">@match.Event</td>
+                                    <td class="align-middle p-3">
+                                        <span class="badge bg-success fs-5 px-4 py-3 text-white fw-bold">@match.Winner</span>
+                                    </td>
+                                    <td class="align-middle p-3">
+                                        <span class="badge bg-danger fs-5 px-4 py-3 text-white fw-bold">@match.Loser</span>
+                                    </td>
+                                    <td class="align-middle p-3">
+                                        @Html.Raw(match.PayPerView ?
+                                        "<span class='badge bg-warning text-dark fs-5 px-4 py-3 fw-bold'>PPV</span>" :
+                                                                "<span class='badge bg-secondary fs-6 px-3 py-2'>No</span>")
+                            </td>
+                            <td class="align-middle p-3">
+                                @Html.Raw(match.ChampionshipOnLine ?
+                                                                "<span class='badge bg-info text-white fs-5 px-4 py-3 fw-bold'>Title</span>" :
+                                                                "<span class='badge bg-secondary fs-6 px-3 py-2'>No</span>")
+                            </td>
+                            <td class="align-middle p-3 fw-bold text-primary fs-6">@match.DateString</td>
+                        </tr>
+                                                }
+                        </tbody>
+                    </table>
+                </div>
+
+                @if (Model.TotalMatches > 0)
+                {
+                    <div class="row mt-5">
+                        <div class="col-md-12 text-center">
+                            <div class="d-flex justify-content-center flex-wrap gap-2">
+                                @if (Model.CurrentPage > 1)
+                                {
+                                    <a class="btn btn-outline-secondary fw-bold px-4 py-2 rounded-pill shadow-sm text-decoration-none"
+                                       href="?currentpage=@(Model.CurrentPage - 1)&Company=@Model.Company&PpvFilter=@Model.PpvFilter&SearchWrestler=@Model.SearchWrestler">
+                                        ← Previous
+                                    </a>
+                                }
+
+                                @for (int i = Math.Max(1, Model.CurrentPage - 2); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 2); i++)
+                                {
+                                    <a class="btn @(i == Model.CurrentPage ? "btn-primary" : "btn-light") fw-bold px-3 py-2 rounded-circle shadow-sm text-decoration-none"
+                                       style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;"
+                                       href="?currentpage=@i&Company=@Model.Company&PpvFilter=@Model.PpvFilter&SearchWrestler=@Model.SearchWrestler">@i</a>
+                                }
+
+                                @if (Model.CurrentPage < Model.TotalPages)
+                                {
+                                    <a class="btn btn-outline-secondary fw-bold px-4 py-2 rounded-pill shadow-sm text-decoration-none"
+                                       href="?currentpage=@(Model.CurrentPage + 1)&Company=@Model.Company&PpvFilter=@Model.PpvFilter&SearchWrestler=@Model.SearchWrestler">
+                                        Next →
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Summary -->
+                    <div class="text-center mt-4">
+                        <p class="h4 text-muted fw-bold">
+                            Showing <span class="text-primary fs-3">@(Math.Min((Model.CurrentPage - 1) * Model.PageSize + 1, Model.TotalMatches))</span> -
+                            <span class="text-primary fs-3">@(Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalMatches))</span>
+                            of <span class="text-success fs-3">@Model.TotalMatches</span> matches
+                            <span class="badge bg-primary fs-5 px-4 py-3">Page @Model.CurrentPage of @Model.TotalPages</span>
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <h2 class="text-muted mb-4">No matches found</h2>
+            <p class="lead text-muted fs-4">Try adjusting your search or filters above</p>
+        </div>
+    }
+</div>
